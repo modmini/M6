@@ -311,7 +311,7 @@ class LINE:
 
       prof = self.getProfile()
 
-      print("\n\nBotLike By Farzain-zFz\nForked From LIN3-TCR\nhttps://youtube.com/c/zfz48\n\n\n\n\n")
+      print("\n\nBot By.Sai\nรับทำบอททุกชนิด\nสนใจติดต่อ\nทราย http://line.me/ti/p/~saibot010902853778\n\n\n")
       print("mid -> " + prof.mid)
       print("name -> " + prof.displayName)
       print("authToken -> " + self.authToken)
