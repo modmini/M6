@@ -102,8 +102,8 @@ Bots=[mid,Amid,Bmid,Cmid,"ubcd678c1e478baff8a4c453e52049dbf","u42af57094f6b2b68b
 admin=["ubcd678c1e478baff8a4c453e52049dbf","u42af57094f6b2b68b607fd8c622c4733","ubd78f3da598d3c32e075e062e88545ec","u10bfcf605a3784ca60eb4507391f49b7"]
 wait = {
     'contact':True,
-    'autoJoin':True,
-    'autoCancel':{"on":True,"members":1},
+    'autoJoin':False,
+    'autoCancel':{"on":False,"members":1},
     'leaveRoom':True,
     'timeline':False,
     'autoAdd':False,
@@ -1898,7 +1898,111 @@ def bot(op):
                   cl.updateGroup(G)
                   Ticket = cl.reissueGroupTicket(msg.to)
     #----------------------Fungsi Join Group Finish---------------#
+            if msg == "sai.sai":
+                    text = """
+[ELIFBot]ヘルプ(コマンド一覧)
 
+※現在テスト動作中です。安定して動作しないことがあります。
+
+-権限なしで使えるコマンド-
+mid = midを送信します
+gid = gidを送信します
+
+ggr:(検索する言葉) = Google検索します
+ggrks = ぐぐれかす
+send:(言葉) = (言葉)を喋ります
+
+権限 = 権限を持ってるかどうか調べます
+
+召喚 = 作者を召喚します
+
+-権限が必要なコマンド-
+
+note:(文) = (文)をノートに書き込みます
+キッカー　= kickerが参加してない場合参加します
+Friend:(mid) = midからプロフィール情報を読み込みます
+
+speed = 速度測定
+
+gurl-on = グループ招待URL許可
+gurl-off = グループ招待URL拒否
+gurl-get = グループ招待URL生成
+
+Ginfo = グループ情報、設定表示
+
+kick-on = 蹴り保護オン
+kick-off = 蹴り保護オフ
+
+gname-on = 名前保護オン
+gname-off = 名前保護オフ
+
+kickInvitation-on = 蹴られた人を再招待します
+kickInvitation-off = 蹴られた人を再招待しません
+
+Invitation-on = 招待保護オン
+Invitation-off = 招待保護オフ
+
+All-on = 全部の設定をオンにします
+All-off = 全部の設定をオフにします
+
+b/a = ブラリス追加
+b/d = ブラリス確認
+
+b/b = ブラリス排除
+
+b/b-on = ブラリス招待、排除を常に行う
+b/b-off = ブラリス招待、排除を常に行わない
+
+b/r = ブラリス解除
+
+KK:(mid) = 該当するmidの人をキック
+NK:(名前) = 該当する名前の人をキック
+MK:(@メンション) = メンションした人をキック
+
+Cancel = 全キャンセル
+
+Leave = 退会します
+
+-権限レベル4が必要なコマンド-
+debug = 知らねぇよ
+"""
+                    kokoa.sendText(op.message.to,text)
+            if msg == "mid":
+                    text = "あなたのmidは\n%s\nです。"%(op.message.from_)
+                    kokoa.sendText(op.message.to,text)
+            if msg == "gid":
+                    text = "このグループのidは\n%s\nです。"%(op.message.to)
+                    kokoa.sendText(op.message.to,text)
+            if msg == "getprofile":
+                    try:
+                        pr = kokoa.getContact(op.message.from_)
+                        text = "[displayName]\n%s\n[mid]\n%s\n[statusMessage]\n%s\n[pictureStatus]\nhttp://dl.profile.line.naver.jp/%s"%(pr.displayName,pr.mid,pr.statusMessage,pr.pictureStatus)
+                        kokoa.sendText(op.message.to,text)
+                    except:
+                        text = "情報の取得に失敗しました。"
+                        cl.sendText(op.message.to,text)
+            if msg == "権限":
+                    if op.message.from_ in dp:
+                        text = "あなたは権限レベル4を所持しています"
+                    elif op.message.from_ in rt:
+                        text = "あなたは権限レベル3を所持しています"
+                    elif op.message.from_ in ad:
+                        text = "あなたは権限レベル2を所持しています"
+                    elif op.message.from_ in ur:
+                        text = "あなたは権限レベル1を所持しています"
+                    else:
+                        text = "あなたは権限を所持していません"
+                    kokoa.sendText(op.message.to,text)
+            if msg == "ggrks":
+                    t1 = 'インターネット上の電子掲示板やチャットにおいて、予め自分で調べることを全くorほとんどしないまま、初歩的なことをあれこれ質問するユーザに対して、「ググれカス（または"ググレカス"、"ggrks"）」と返答を浴びせるのが一般的な用法である。\n\n'
+                    t2 = "ググレカスとは「それくらい自分でググれ※1、カス野郎」の略。\n\n"
+                    t3 = "この事態に触発されたふたば☆ちゃんねるの住人がネタとして“ググレカス”というローマ時代の人物をでっち上げた。\n"
+                    t4 = "その後、同様の発想による亜種が幾つも生み出されるほどの一大ムーブメントとなる。･･･と言われているが、真偽は定かではない。"
+                    text = t1 + t2 + t3 + t4
+                    kokoa.sendText(op.message.to,text)
+                    text2 = "このくらいggrks\nリンク貼っておくから\n\nhttp://www.google.co.jp/search?q=ggrks"
+                    kokoa.sendText(op.message.to,text2)
+                
     #-------------Fungsi Leave Group Start---------------#
             elif msg.text in ["sai bye"]:
               if msg.from_ in admin:
